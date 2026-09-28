@@ -1,0 +1,395 @@
+تفضل الكود المعدل بالكامل جاهز للنسخ واللصق مباشرةً.
+
+تم تحسين الخلفية وتزويدها بـ:
+
+1. **عدد أكبر من الطائرات (6 طائرات)** تتحرك بسرعات ومسارات اتجاهية مختلفة (أفقية وماثلة).
+2. **سماء ليلية مليئة بالنجوم المتلألئة (Twinkling Stars)** لإعطاء عمق فضائي راقٍ.
+3. **خطوط تتبع مضيئة (Flight Contrails)** خلف الطائرات لتعزيز المظهر التفاعلي الاحترافي.
+
+---
+
+### 💻 كود الـ HTML المكتمل:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ahmed Ehab Atta | Aviation Computer Engineer, Full-Stack .NET & BI Analyst</title>
+<meta name="description" content="Portfolio of Ahmed Ehab Atta Mohamed: Aviation Computer Engineer, ASP.NET Core, SQL Server, Power BI, and Tableau Specialist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--bg:#050a14;--surface:rgba(15,23,42,0.78);--surface-solid:#0f172a;--line:#1e293b;--text:#e2e8f0;--muted:#94a3b8;--web:#38bdf8;--data:#fbbf24}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:Figtree,system-ui,sans-serif;line-height:1.65;margin:0;overflow-x:hidden}
+h1,h2,h3,.disp{font-family:'Bricolage Grotesque',Georgia,serif;letter-spacing:-.02em}
+
+/* Animated Aviation & Starry Background */
+.sky-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;background:radial-gradient(ellipse at bottom,#0b172d 0%,#050a14 100%)}
+.radar-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(56,189,248,0.1) 1px, transparent 1px);background-size:40px 40px}
+
+/* Starfield */
+.stars{position:absolute;inset:0;background-image:
+  radial-gradient(1.5px 1.5px at 10px 20px, #ffffff, transparent),
+  radial-gradient(1.5px 1.5px at 100px 250px, rgba(255,255,255,0.8), transparent),
+  radial-gradient(2px 2px at 200px 80px, #ffffff, transparent),
+  radial-gradient(1px 1px at 300px 400px, rgba(255,255,255,0.9), transparent),
+  radial-gradient(2px 2px at 450px 150px, #ffffff, transparent),
+  radial-gradient(1.5px 1.5px at 600px 320px, rgba(255,255,255,0.7), transparent),
+  radial-gradient(2px 2px at 750px 50px, #ffffff, transparent),
+  radial-gradient(1px 1px at 850px 480px, rgba(255,255,255,0.8), transparent);
+background-size:900px 600px;animation:twinkle 4s ease-in-out infinite alternate}
+
+@keyframes twinkle{0%{opacity:0.4}100%{opacity:0.95}}
+
+/* Fast Planes with Contrails */
+.plane-container{position:absolute;display:flex;align-items:center}
+.plane-svg{width:28px;height:28px;fill:var(--web);filter:drop-shadow(0 0 8px rgba(56,189,248,0.8))}
+.trail{height:2px;background:linear-gradient(90deg, transparent, rgba(56,189,248,0.6));border-radius:2px;margin-right:-2px}
+
+.p1{top:12%;left:-120px;animation:flyFast1 9s linear infinite}
+.p2{top:32%;left:-120px;animation:flyFast2 7s linear infinite 2s}
+.p3{top:52%;left:-120px;animation:flyFast3 11s linear infinite 1s}
+.p4{top:72%;left:-120px;animation:flyFast4 8s linear infinite 4s}
+.p5{top:88%;left:-120px;animation:flyFast1 10s linear infinite 5s}
+.p6{top:22%;left:-120px;animation:flyFast3 6.5s linear infinite 3.5s}
+
+@keyframes flyFast1{
+  0%{transform:translateX(0) translateY(0) rotate(12deg);opacity:0}
+  5%{opacity:1}
+  95%{opacity:1}
+  100%{transform:translateX(calc(100vw + 200px)) translateY(-100px) rotate(12deg);opacity:0}
+}
+@keyframes flyFast2{
+  0%{transform:translateX(0) translateY(0) rotate(-8deg);opacity:0}
+  5%{opacity:1}
+  95%{opacity:1}
+  100%{transform:translateX(calc(100vw + 200px)) translateY(120px) rotate(-8deg);opacity:0}
+}
+@keyframes flyFast3{
+  0%{transform:translateX(0) translateY(0) rotate(5deg);opacity:0}
+  5%{opacity:1}
+  95%{opacity:1}
+  100%{transform:translateX(calc(100vw + 200px)) translateY(-40px) rotate(5deg);opacity:0}
+}
+@keyframes flyFast4{
+  0%{transform:translateX(0) translateY(0) rotate(-15deg);opacity:0}
+  5%{opacity:1}
+  95%{opacity:1}
+  100%{transform:translateX(calc(100vw + 200px)) translateY(160px) rotate(-15deg);opacity:0}
+}
+
+.glow{position:absolute;inset:0;pointer-events:none;background:
+radial-gradient(550px 350px at 10% 10%,rgba(56,189,248,0.15),transparent 70%),
+radial-gradient(500px 320px at 90% 35%,rgba(251,191,36,0.1),transparent 70%)}
+
+.card{background:var(--surface);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px}
+.tag{font-size:.78rem;padding:.15rem .6rem;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:rgba(15,23,42,0.6)}
+.proj{transition:transform .35s,border-color .35s;cursor:pointer;overflow:hidden;display:flex;flex-direction:column}
+.proj:hover,.proj:focus-visible{transform:translateY(-4px);border-color:var(--web)}
+.proj img{transition:transform .5s;image-rendering:-webkit-optimize-contrast}.proj:hover img{transform:scale(1.05)}
+.cover{aspect-ratio:16/10;overflow:hidden;background:#0d1526;margin:-1px -1px 0;position:relative}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:top}
+a:focus-visible,button:focus-visible,.proj:focus-visible{outline:2px solid var(--web);outline-offset:3px}
+.btn{display:inline-block;padding:.75rem 1.4rem;border-radius:999px;font-weight:600;transition:transform .2s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+
+.frame{position:relative;width:min(300px,72vw);aspect-ratio:4/5;margin:auto;padding:3px;border-radius:32px;overflow:hidden;transition:transform .2s;transform-style:preserve-3d}
+.frame::before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,var(--web),transparent 30%,var(--data),transparent 70%,var(--web));animation:spin 7s linear infinite}
+.frame img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:29px;background:var(--surface-solid);display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+dialog{background:var(--surface-solid);color:var(--text);border:1px solid var(--line);border-radius:20px;max-width:850px;width:calc(100% - 2rem);padding:0;max-height:92vh}
+dialog::backdrop{background:rgba(2,6,23,.88)}
+.gal-main{width:100%;aspect-ratio:16/10;object-fit:contain;background:#070d1a;border-radius:12px;cursor:zoom-in}
+.thumb{width:80px;height:52px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;opacity:.6;transition:opacity .2s,border-color .2s}
+.thumb[aria-current="true"]{border-color:var(--data);opacity:1}
+#lb{position:fixed;inset:0;z-index:60;background:rgba(2,5,12,.96);display:none;align-items:center;justify-content:center;padding:1rem}
+#lb.on{display:flex}#lb img{max-width:98vw;max-height:92vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.tl{border-left:2px solid var(--line)}
+.tl li::before{content:"";position:absolute;left:-7px;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--web);box-shadow:0 0 0 4px var(--bg)}
+@media (prefers-reduced-motion:reduce){*,.frame::before,.stars,.p1,.p2,.p3,.p4,.p5,.p6{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- Animated Aviation Sky Background with Stars & Fast Jet Contrails -->
+<div class="sky-bg">
+  <div class="stars"></div>
+  <div class="radar-grid"></div>
+
+  <div class="plane-container p1"><div class="trail" style="width:110px"></div><svg class="plane-svg" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+  <div class="plane-container p2"><div class="trail" style="width:140px"></div><svg class="plane-svg" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+  <div class="plane-container p3"><div class="trail" style="width:90px"></div><svg class="plane-svg" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+  <div class="plane-container p4"><div class="trail" style="width:160px"></div><svg class="plane-svg" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+  <div class="plane-container p5"><div class="trail" style="width:120px"></div><svg class="plane-svg" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+  <div class="plane-container p6"><div class="trail" style="width:180px"></div><svg class="plane-svg" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+</div>
+
+<header class="fixed top-0 inset-x-0 z-40 backdrop-blur-md" style="background:rgba(5,10,20,.85); border-bottom:1px solid rgba(30,41,59,0.8)">
+  <nav class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="#top" class="disp font-bold text-lg flex items-center gap-2">
+      <span style="color:var(--web)">✈</span> Ahmed Ehab
+    </a>
+    <div class="hidden sm:flex gap-7 text-sm" style="color:var(--muted)">
+      <a href="#skills" class="hover:text-white transition">Skills</a>
+      <a href="#projects" class="hover:text-white transition">Projects</a>
+      <a href="#journey" class="hover:text-white transition">Experience</a>
+      <a href="#contact" class="hover:text-white transition">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top" class="relative z-10">
+<section class="relative overflow-hidden pt-32 pb-20">
+  <div class="glow"></div>
+  <div class="relative max-w-6xl mx-auto px-5 grid lg:grid-cols-[1.3fr_1fr] gap-12 items-center">
+    <div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="tag">Aviation Systems Engineer</span>
+        <span class="tag">ASP.NET Core</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Tableau</span>
+      </div>
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.02]">Ahmed Ehab Atta Mohamed</h1>
+      <p class="disp text-2xl sm:text-3xl mt-4 font-semibold" style="color:var(--web)">Aviation Computer Engineer | Full-Stack .NET & BI Analyst</p>
+      <p class="mt-5 text-lg max-w-xl" style="color:var(--muted)">Combining engineering rigor with robust software architecture and high-impact aviation & business intelligence dashboards.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#projects" class="btn" style="background:var(--web);color:#06101f">View my work</a>
+        <a href="#contact" class="btn" style="border:1px solid var(--line);background:var(--surface)">Contact me</a>
+      </div>
+    </div>
+    <div id="frame" class="frame">
+      <img src="https://i.ibb.co/vxDZg6Vc/Whats-App-Image-2026-09-27-at-5-26-23-PM.jpg" alt="Ahmed Ehab Atta Mohamed" width="300" height="375">
+    </div>
+  </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-5 py-16">
+  <div class="card p-8 sm:p-10">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
+    <p class="text-lg leading-relaxed" style="color:var(--muted)">
+      I am a <strong class="text-white">Computer & Aviation Information Systems Engineer</strong> with a strong academic background (<strong class="text-white">GPA 3.2</strong>) and specialized training from <strong class="text-white">DEPI</strong> (Web Full-Stack .NET) and <strong class="text-white">ITI</strong> (Data Analyst Diploma).
+    </p>
+    <p class="text-lg leading-relaxed mt-4" style="color:var(--muted)">
+      My expertise uniquely bridges complex engineering systems, secure full-stack web applications, and data-driven intelligence. Whether designing relational SQL databases, engineering ASP.NET Web APIs, or crafting executive analytical dashboards for aviation and retail logistics, I focus on delivering scalable, precise, and user-centric solutions.
+    </p>
+  </div>
+</section>
+
+<section id="skills" class="max-w-6xl mx-auto px-5 py-16">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-8">Engineering & Analytics Expertise</h2>
+  <div class="grid md:grid-cols-6 gap-5">
+    <article class="card p-7 md:col-span-4 md:row-span-2 hover:-translate-y-1 transition" style="border-top:3px solid var(--web)">
+      <h3 class="text-2xl font-bold">Back-End & Systems Engineering</h3>
+      <p class="mt-2" style="color:var(--muted)">Designing secure, scalable services and robust relational data architectures.</p>
+      <div class="flex flex-wrap gap-2 mt-5">
+        <span class="tag">C#</span>
+        <span class="tag">ASP.NET Core Web API</span>
+        <span class="tag">Entity Framework Core</span>
+        <span class="tag">SQL Server (SSMS)</span>
+        <span class="tag">T-SQL Architecture</span>
+        <span class="tag">System Design</span>
+      </div>
+    </article>
+    <article class="card p-7 md:col-span-2 hover:-translate-y-1 transition" style="border-top:3px solid var(--web)">
+      <h3 class="text-xl font-bold">Front-End & UI</h3>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Responsive Web Design</span>
+        <span class="tag">UI/UX Integration</span>
+      </div>
+    </article>
+    <article class="card p-7 md:col-span-2 hover:-translate-y-1 transition" style="border-top:3px solid var(--data)">
+      <h3 class="text-xl font-bold">Business & Aviation Intelligence</h3>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="tag">Power BI</span>
+        <span class="tag">Tableau Public</span>
+        <span class="tag">DAX</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">Star Schema Modeling</span>
+        <span class="tag">Advanced Excel</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="projects" class="max-w-6xl mx-auto px-5 py-16">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-2">Featured Projects</h2>
+  <p class="mb-8" style="color:var(--muted)">Click any project card to inspect high-definition screenshots and technical details.</p>
+  <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+</section>
+
+<section id="journey" class="max-w-6xl mx-auto px-5 py-16">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-8">Education & Track Record</h2>
+  <ul class="tl ml-2 space-y-8 max-w-3xl">
+    <li class="relative pl-7">
+      <h3 class="text-xl font-bold">B.Sc. Computers & Aviation Information Systems Engineering</h3>
+      <p style="color:var(--muted)">Graduated with a GPA of 3.2. Focused on computer systems, database design, software engineering, and aviation information infrastructure.</p>
+    </li>
+    <li class="relative pl-7">
+      <h3 class="text-xl font-bold">DEPI, Round 5: Web Full-Stack .NET Track</h3>
+      <p style="color:var(--muted)">Intensive practical engineering in C#, ASP.NET Core, EF Core, RESTful APIs, and SQL Server database systems.</p>
+    </li>
+    <li class="relative pl-7">
+      <h3 class="text-xl font-bold">ITI: Data Analyst Diploma</h3>
+      <p style="color:var(--muted)">Advanced analytical modeling, Power BI, DAX, Power Query, Tableau Public, and Excel for business and aviation domain datasets.</p>
+    </li>
+  </ul>
+</section>
+
+<section id="contact" class="max-w-6xl mx-auto px-5 py-16">
+  <div class="card p-8 sm:p-12 relative overflow-hidden">
+    <div class="glow"></div>
+    <div class="relative">
+      <h2 class="text-3xl sm:text-4xl font-bold">Let's Build Something Exceptional</h2>
+      <p class="mt-3 max-w-xl" style="color:var(--muted)">Open for Software Engineering, Full-Stack .NET, and Data Analytics / BI opportunities.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="btn" style="border:1px solid var(--line);background:rgba(15,23,42,0.8)" href="mailto:a.ehab.atta@gmail.com">Email: a.ehab.atta@gmail.com</a>
+        <a class="btn" style="border:1px solid var(--line);background:rgba(15,23,42,0.8)" href="https://wa.me/201289110241" target="_blank" rel="noopener">Phone / WhatsApp: +20 1289110241</a>
+        <a class="btn" style="border:1px solid var(--line);background:rgba(15,23,42,0.8)" href="https://www.linkedin.com/in/ahmed-ehab-atta21" target="_blank" rel="noopener">LinkedIn Profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="text-center text-sm py-10 relative z-10" style="color:var(--muted)">© <span id="yr"></span> Ahmed Ehab Atta Mohamed</footer>
+
+<dialog id="dlg" aria-labelledby="d-title">
+  <div class="p-6 sm:p-7 overflow-y-auto" style="max-height:90vh">
+    <div id="d-gal" class="mb-5"></div>
+    <p id="d-cat" class="text-sm" style="color:var(--data)"></p>
+    <h3 id="d-title" class="text-2xl font-bold mt-1"></h3>
+    <p id="d-desc" class="mt-3" style="color:var(--muted)"></p>
+    <div id="d-tags" class="flex flex-wrap gap-2 mt-4"></div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a id="d-link" class="btn" style="background:var(--data);color:#1a1000" target="_blank" rel="noopener">View live on Tableau Public</a>
+      <button id="d-close" class="btn" style="border:1px solid var(--line)">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<div id="lb" role="dialog" aria-label="Full-size screenshot"><img alt=""></div>
+
+<script>
+const TABLEAU="https://public.tableau.com/shared/KTD7WZYHY?:display_count=n&:origin=viz_share_link";
+
+const P=[
+{
+  t:"Retail Sales & Performance Dashboard",
+  c:"Business Intelligence / Tableau",
+  s:["Tableau Public","Data Visualization","E-Commerce Analytics"],
+  d:"An interactive executive dashboard designed to evaluate geographic sales distribution and product profitability across the US market for 2024. Features custom location mapping and cross-filtering across 6,000+ records.",
+  i:[
+    "https://i.ibb.co/prRxV3bn/Screenshot-156.png",
+    "https://i.ibb.co/HDhr88BJ/Screenshot-157.png",
+    "https://i.ibb.co/qLmYYNnp/Screenshot-158.png",
+    "https://i.ibb.co/Wvkhzs0Y/Screenshot-159.png",
+    "https://i.ibb.co/XrHr7s8J/Screenshot-28-9-2026-132641-public-tableau-com.jpg"
+  ],
+  l:TABLEAU
+},
+{
+  t:"Airport Performance & Traffic Analytics Dashboard",
+  c:"Business Intelligence / Power BI / Aviation",
+  s:["Power BI","DAX","Power Query","Aviation Analytics"],
+  d:"A comprehensive executive analytics dashboard designed to track airport traffic, flight delays, passenger volume, and operational profitability metrics with dynamic filtering and drill-down views.",
+  i:[
+    "https://i.ibb.co/Sw2JLzCw/Screenshot-252.png",
+    "https://i.ibb.co/jPzkrPbj/Screenshot-254.png",
+    "https://i.ibb.co/Z6t1xHK5/Screenshot-255.png"
+  ]
+},
+{
+  t:"Air Cargo Management System",
+  c:"Business Intelligence & Logistics / Power BI",
+  s:["Power BI","Power Query","DAX","Aviation Logistics"],
+  d:"A robust analytics and cargo management dashboard designed to monitor airway bills, freight volume, flight status, and operational metrics.",
+  i:[
+    "https://i.ibb.co/Kpkj9LZY/Screenshot-251.png",
+    "https://i.ibb.co/vCB807Sx/Screenshot-253.png"
+  ]
+},
+{
+  t:"Library Management System & Database Architecture",
+  c:"Web Development & Database Systems",
+  s:["ASP.NET Core","SQL Server","ERD Modeling","T-SQL"],
+  d:"A comprehensive library system featuring relational database modeling (ERD), automated book borrowing tracking, catalog management, and administrative dashboards.",
+  i:[
+    "https://i.ibb.co/FLFLvPgP/Dashboard-Screenshot.png",
+    "https://i.ibb.co/XkJCqBHg/ERD.png",
+    "https://i.ibb.co/XfjcpVKh/Screenshot-180.png"
+  ]
+}
+];
+
+const $=id=>document.getElementById(id),tags=a=>a.map(x=>`<span class="tag">${x}</span>`).join('');
+const grid=$('grid'),dlg=$('dlg'),lb=$('lb'),lbi=lb.querySelector('img');
+let cur=0,imgs=[];
+
+function show(n){
+  cur=(n+imgs.length)%imgs.length;
+  $('gm').src=imgs[cur];
+  document.querySelectorAll('.thumb').forEach((t,k)=>t.setAttribute('aria-current',k===cur));
+}
+
+function open(p){
+  imgs=p.i;
+  $('d-gal').innerHTML=imgs.length?`<div class="relative"><img id="gm" class="gal-main" alt="${p.t} screenshot" title="Click to view full screen">${imgs.length>1?`<button id="pv" class="btn absolute left-2 top-1/2 -translate-y-1/2" style="background:rgba(15,23,42,.85);padding:.4rem .9rem" aria-label="Previous screenshot">‹</button><button id="nx" class="btn absolute right-2 top-1/2 -translate-y-1/2" style="background:rgba(15,23,42,.85);padding:.4rem .9rem" aria-label="Next screenshot">›</button>`:''}</div>${imgs.length>1?`<div class="flex gap-2 mt-3 overflow-x-auto pb-1">${imgs.map((u,k)=>`<img class="thumb" src="${u}" alt="Screenshot ${k+1}" data-k="${k}">`).join('')}</div>`:''}`:'';
+  if(imgs.length){
+    show(0);
+    $('gm').onclick=()=>{lbi.src=imgs[cur];lb.classList.add('on')};
+    if(imgs.length>1){
+      $('pv').onclick=()=>show(cur-1);$('nx').onclick=()=>show(cur+1);
+      document.querySelectorAll('.thumb').forEach(t=>t.onclick=()=>show(+t.dataset.k));
+    }
+  }
+  $('d-cat').textContent=p.c;
+  $('d-title').textContent=p.t;
+  $('d-desc').textContent=p.d;
+  $('d-tags').innerHTML=tags(p.s);
+  const L=$('d-link');
+  L.style.display=p.l?'':'none';
+  if(p.l)L.href=p.l;
+  dlg.showModal();
+}
+
+P.forEach(p=>{
+  const el=document.createElement('article');
+  el.className='card proj';
+  el.tabIndex=0;
+  el.setAttribute('role','button');
+  el.setAttribute('aria-label','Open '+p.t);
+  const cover=p.i[0]?`<div class="cover"><img src="${p.i[0]}" alt="${p.t}" loading="lazy"></div>`:'';
+  el.innerHTML=`${cover}<div class="p-6 flex flex-col flex-1"><p class="text-sm font-medium" style="color:var(--data)">${p.c}</p><h3 class="text-xl font-bold mt-1">${p.t}</h3><p class="mt-2 text-sm flex-1" style="color:var(--muted)">${p.d.split('. ')[0].replace(/\.$/,'')}.</p><div class="flex flex-wrap gap-2 mt-4">${tags(p.s)}</div>${p.l?`<a href="${p.l}" target="_blank" rel="noopener" class="btn mt-5 text-center" style="background:var(--data);color:#1a1000">View live on Tableau Public</a>`:''}</div>`;
+  el.onclick=e=>{if(!e.target.closest('a'))open(p)};
+  el.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();open(p)}};
+  grid.appendChild(el);
+});
+
+$('d-close').onclick=()=>dlg.close();
+dlg.onclick=e=>{if(e.target===dlg)dlg.close()};
+lb.onclick=()=>lb.classList.remove('on');
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&lb.classList.contains('on')){lb.classList.remove('on');e.stopPropagation();e.preventDefault()}
+  else if(dlg.open&&imgs.length>1&&$('gm')){if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)}
+},true);
+
+const f=$('frame');
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  f.addEventListener('pointermove',e=>{const r=f.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;f.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg)`});
+  f.addEventListener('pointerleave',()=>f.style.transform='');
+}
+$('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
+
+```
